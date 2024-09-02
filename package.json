@@ -1,0 +1,16 @@
+{
+  "name": "showProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npx --prefix ffblog prisma migrate  dev\" \"pnpm --prefix ffblog dev\" \"pnpm --prefix ffbolgWeb dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
