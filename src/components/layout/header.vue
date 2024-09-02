@@ -1,5 +1,5 @@
 <template>
-    <div class="header-container  w-full h-[80px]  bg-black bg-opacity-10 ">
+    <div class="header-container  w-full h-[80px]  bg-black bg-opacity-30 ">
         <div class="word  ml-[30px] flex items-center justify-center h-[50px] w-[147px]
          text-white text-[20px] rounded-[7px] " >
             风风的个人博客

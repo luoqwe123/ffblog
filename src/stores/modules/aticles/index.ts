@@ -33,7 +33,7 @@ export const articleStore = defineStore('article',{
         },
         async uploadImages(file:File){
             let res = await uploadImage(file)
-           
+            
             return res?.data.code ==200?Promise.resolve(res?.data.data.path):Promise.reject("获取失败")
         }
     },

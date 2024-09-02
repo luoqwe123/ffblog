@@ -139,7 +139,8 @@ const send = async () => {
   let res = await store.uploadImages(files)
   data.file = "http://localhost:3000/" + res
 
-  await store.addArticles(data)
+  let respose = await store.addArticles(data)
+  alert(respose)
   $router.push({path:"/"})
 }
 type InsertFnType = (url: string, alt: string, href: string) => void

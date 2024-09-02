@@ -2,10 +2,10 @@
     <div class="Avatar-container">
         <div class="top">
             <div class="top-picture">
-                <img src="../../../public/4.jpg" alt="" class="avatar">
+                <img src="../../../public/168.jpg" alt="" class="avatar">
             </div>
 
-            <div class="name">小丑</div>
+            <div class="name">独断万古柳如烟</div>
         </div>
         <div class="center">
             <a href="" v-for="(item, key) in avatarInfo.info" :key="key" class="center-link">
@@ -25,7 +25,7 @@
 
         </div>
         <div class="end" style="display: flex; justify-content: space-around;align-items: center;margin-top: 10px;">
-            <a href="" v-for="(item,key) in avatarInfo.icon" :key="key" style="display: flex;align-items: center;">
+            <a :href=url[key] v-for="(item,key) in avatarInfo.icon" :key="key" style="display: flex;align-items: center;">
                 <i class="end-icon" style="display: flex;align-items: center;justify-content: center;">
                     <svg style="height: 28px;width: 28px;">
                         <use :xlink:href="'#icon-' + item" fill="#49b1f5"></use>
@@ -43,11 +43,13 @@ const avatarInfo = withDefaults(defineProps<{
     length: any,
     svgName?: string,
     icon?:any,
+    url?:any
 }>(), {
     info: ["文章", "标签"],
     length: [22, 33, 44],
     svgName: "Information",
-    icon:["github","gitee"]
+    icon:["github","gitee"],
+    url:["https://github.com/luoqwe123/ffblog","https://gitee.com/dashboard/projects"]
 })
 
 
@@ -66,6 +68,7 @@ const avatarInfo = withDefaults(defineProps<{
         font-family: 'Font Name', cursive;
         line-height: 40px;
         height: 40px;
+        font-size: 30px;
     }
 }
 
@@ -105,8 +108,8 @@ const avatarInfo = withDefaults(defineProps<{
 
 .avatar {
 
-    height: 130px;
-    width: 130px;
+    height: 136px;
+    width: 136px;
     border-radius: 50%;
 }
 

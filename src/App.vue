@@ -1,5 +1,6 @@
 <template>
     <div class="app">
+        <Header class="header"></Header>
         <div class="loading" v-if="showLoading">
             <Loading></Loading>
         </div>
@@ -10,6 +11,7 @@
 <script setup lang='ts'>
 import { RouterView } from "vue-router"
 import Loading from "@/components/loading/index.vue"
+import Header from "./components/layout/header.vue";
 import { ref, } from "vue"
 import router from "./router";
  let showLoading = ref(true)
@@ -20,4 +22,10 @@ router.afterEach(()=>{
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.header {
+  position: fixed;
+  z-index: 3;
+  top: 0px;
+}
+</style>

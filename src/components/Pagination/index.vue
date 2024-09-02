@@ -60,6 +60,7 @@ const paginationSet = withDefaults(defineProps<{
     pageSize:3,
     total:19,
 })
+
 let arr =  paginationSet.layout.split(",")
 const pageCount = Math.ceil(paginationSet.total/paginationSet.pageSize)
 let pageArr:any = []

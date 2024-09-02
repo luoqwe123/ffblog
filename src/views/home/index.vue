@@ -1,8 +1,9 @@
 <template>
  
-  <div class="home" >
+  <div class="home" > 
+   
     <div class="home-container">
-      <Header class="header"></Header>
+     
       <div class="top-part">
         <Meteor />
       </div>
@@ -32,7 +33,7 @@
 
       </div>
       <div class="right " style="margin-left: 10px;">
-        <Avatar style="margin-top: 20px;" :length=articleMeta></Avatar>
+        <Avatar style="margin-top: 20px;" :length=articleMeta ></Avatar>
         <Poem style="margin-top: 10px;"></Poem>
       </div>
     </div>
@@ -42,7 +43,7 @@
 
 <script setup lang='ts'>
 import Meteor from "@/components/meteor/index.vue"
-import Header from '@/components/layout/header.vue'
+
 import Icon from "@/components/svgComponent/index.vue"
 import GarbledText from "@/components/garbledText/index.vue"
 import Pagination from "@/components/Pagination/index.vue"
@@ -55,6 +56,7 @@ import {  ref, } from "vue"
 import { row } from "@/utils/setConstant"
 import dayjs from "dayjs"
 import { useRouter } from "vue-router"
+
 
 
 
@@ -72,7 +74,6 @@ const handleArticle = async (page: number, row: number) => {
 
   if (!articleInfo.value.length) {
     articleMeta.value.push(res.meta.total)
-    console.log(res.meta.categoryTotal)
     articleMeta.value.push(res.meta.categoryTotal)
 
 
@@ -107,10 +108,7 @@ const showArticle = (id: any) => {
   justify-content: center;
 }
 
-.header {
-  position: relative;
-  z-index: 3;
-}
+
 
 .top-part {
   position: absolute;
@@ -119,10 +117,13 @@ const showArticle = (id: any) => {
 }
 
 .main {
-  margin-top: 42vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  text-align: justify;
 }
 
 .home-container {
@@ -130,7 +131,7 @@ const showArticle = (id: any) => {
   width: 100%;
   background: url(../../../back.jpg);
   background-size: cover;
-
+  position: relative;
 }
 
 .picture {

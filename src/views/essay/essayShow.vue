@@ -1,5 +1,5 @@
 <template>
-    <div class="show-container" style="width: 80%;margin-left: 10%;margin-top: 40px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    <div class="show-container" style="width: 80%;margin-left: 10%;margin-top: 9rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;padding: 36px;min-height: 80vh;
     border: 0.5px rgba(0, 0, 0, 0.1) solid;">
         <h1 style="height: 30px;border-bottom: 1px solid rgba(0, 0, 0, 0.3);

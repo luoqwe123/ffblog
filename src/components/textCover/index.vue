@@ -1,4 +1,4 @@
-<template>
+``<template>
     <div class="textShow-container h-[255px] 2xl:h-[285px] " @mouseenter="() => { showInco = true }"
         @mouseleave="() => { showInco = false; }">
         <template v-for="(item) in arrLayout">
@@ -77,9 +77,7 @@ if(textCoverInfo.image!=""){
 }
 src.value = textCoverInfo.image!=""?textCoverInfo.image:"../../../4.jpg"
 onMounted(()=>{
-    console.log(cover.value)
-    const callback = (item:any)=>{
-        console.log(item[0].target)
+ const callback = (item:any)=>{
         const  image = item[0].target
         const data_src = image.getAttribute("data_src")
         image.setAttribute('src',data_src)

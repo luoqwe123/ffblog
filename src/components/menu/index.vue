@@ -4,7 +4,7 @@
         <template v-for="(item, key) in menuData.menuList" :key="item.path">
             <div v-if="item.display" class="menuSub"  style="display: flex;flex-direction: column;justify-content: center;"
                 >
-                <menuSub :title="item.meta.title"  style="height: 100%;">
+                <menuSub :title="item.meta.title"  style="height: 100%;" @click="jumpRouter(item.path)">
                     <template #icon>
                         <Icon :name="item.icon"></Icon>
                     </template>
@@ -55,6 +55,7 @@ const menuData = withDefaults(defineProps<{
 })
 
 const jumpRouter = (path:any)=>{
+   
     $router.push(path)
 }
 </script>

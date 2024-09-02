@@ -14,15 +14,26 @@ export const constant = [
         },
 
     },
-    {
-        path: '/404',
-        component: () => import('@/views/404/index.vue'),
-        display:true,
-        name: "404",
-        meta: {
+    // {
+    //     path: '/404',
+    //     component: () => import('@/views/404/index.vue'),
+    //     display:true,
+    //     name: "404",
+    //     meta: {
 
+    //         appear: false,
+    //         title: "404"
+    //     }
+    // },
+    {
+        path: '/label',
+        component: () => import('@/views/Label/index.vue'),
+        display:true,
+        name: "Label",
+        icon:'label',
+        meta: {
             appear: false,
-            title: "404"
+            title: "标签"
         }
     },
     {
@@ -36,42 +47,42 @@ export const constant = [
             title: "登录/注册"
         }
     },
-    {
-        path: '/dataScreen',
-        component: () => import('@/views/login/index.vue'),
-        display:true,
-        name: "dataScreen",
-        icon:'dataScreen',
-        meta: {
-            appear: true,
-            title: "数据大屏"
-        }
-    },
-    {
-        path: '/milestone',
-        component: () => import('@/views/login/index.vue'),
-        display:true,
-        name: "milestone",
-        icon:'milestone',
-        meta: {
-            appear: true,
-            title: "里程碑"
-        }
-    },
-    {
-        path: '/documentation',
-        component: () => import('@/views/login/index.vue'),
-        display:true,
-        name: "documentation",
-        icon:"md",
-        meta: {
-            appear: true,
-            title: "文档"
-        }
-    },
+    // {
+    //     path: '/dataScreen',
+    //     component: () => import('@/views/login/index.vue'),
+    //     display:true,
+    //     name: "dataScreen",
+    //     icon:'dataScreen',
+    //     meta: {
+    //         appear: true,
+    //         title: "数据大屏"
+    //     }
+    // },
+    // {
+    //     path: '/milestone',
+    //     component: () => import('@/views/login/index.vue'),
+    //     display:true,
+    //     name: "milestone",
+    //     icon:'milestone',
+    //     meta: {
+    //         appear: true,
+    //         title: "里程碑"
+    //     }
+    // },
+    // {
+    //     path: '/documentation',
+    //     component: () => import('@/views/login/index.vue'),
+    //     display:true,
+    //     name: "documentation",
+    //     icon:"md",
+    //     meta: {
+    //         appear: true,
+    //         title: "文档"
+    //     }
+    // },
     {
         path: '/picture',
-        component: () => import('@/views/login/index.vue'),
+        component: () => import('@/views/picture/index.vue'),
         display:true,
         name: "picture",
         icon:"picture",
@@ -92,7 +103,7 @@ export const constant = [
         },
         children:[
             {
-                path:'editor',
+                path:'/editor',
                 component:()=>import("@/views/essay/sendArticle.vue"),
                 display:true,
                 name:"Editor",
@@ -151,7 +162,17 @@ export const constant = [
         meta:{
             title:"修改文章"
         }
-    }, 
+    },
+    {
+        path:'/category/:id',
+        component:()=>import("@/views/Label/Label.article.vue"),
+        display:false,
+        name:"category",
+        icon:"addArticle",
+        meta:{
+            title:"标签关联文章"
+        }
+    },  
     {
         path:'/loading',
         component:()=>import("@/components/loading/index.vue"),
