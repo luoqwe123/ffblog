@@ -1,9 +1,8 @@
 <template>
     <div class="app">
+       
         <Header class="header"></Header>
-        <div class="loading" v-if="showLoading">
-            <Loading></Loading>
-        </div>
+       
         <RouterView />
     </div>
 </template>
@@ -12,6 +11,7 @@
 import { RouterView } from "vue-router"
 import Loading from "@/components/loading/index.vue"
 import Header from "./components/layout/header.vue";
+
 import { ref, } from "vue"
 import router from "./router";
  let showLoading = ref(true)

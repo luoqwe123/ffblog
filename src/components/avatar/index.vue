@@ -8,7 +8,7 @@
             <div class="name">独断万古柳如烟</div>
         </div>
         <div class="center">
-            <a href="" v-for="(item, key) in avatarInfo.info" :key="key" class="center-link">
+            <a @click="" v-for="(item, key) in avatarInfo.info" :key="key" class="center-link">
                 <div class="headline">{{ item }}</div>
                 <div class="length-num">{{ avatarInfo.length[key] }}</div>
             </a>

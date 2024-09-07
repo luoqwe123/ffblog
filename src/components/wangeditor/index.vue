@@ -58,6 +58,7 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { articleStore } from '@/stores/modules/aticles';
 import { categoryStore } from '@/stores/modules/category';
 import { useRoute,useRouter } from 'vue-router';
+import { FfMessage } from '../Message';
 let $route = useRoute()
 let $router = useRouter()
 
@@ -78,20 +79,19 @@ const getCategory = async () => {
   let id = $route.params.id
   if (id != undefined) {
     let res = await store.queryArticle(+id)
-
     labelText.value = res.data.category.title
     label.value = res.data.categoryId
     title.value = res.data.title
     valueHtml.value = res.data.content
     imageUrl.value = res.data.image == "" ? "../../../4.jpg" : res.data.image
 
-  } else {
+  } 
     let res = await cStore.getCategorys()
     for (const item of res.data) {
       categoryInfo.value.push(item)
     }
 
-  }
+  
 
 }
 
@@ -105,8 +105,7 @@ const changeImage = () => {
   const files = ipt.value.files
 
   let size = files[0].size / 1024 / 1024
-
-  if (size > 2) {
+  if (size > 7) {
     return false
   }
   if (files.length) imageUrl.value = URL.createObjectURL(files[0])
@@ -130,17 +129,32 @@ onBeforeUnmount(() => {
 const handleCreated = (editor: string) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
+
 const send = async () => {
   let files = ipt.value.files[0]
   let data: any = {}
   data.title = title.value
   data.content = valueHtml.value
   data.categoryId = label.value
-  let res = await store.uploadImages(files)
-  data.file = "http://localhost:3000/" + res
+  if(files != undefined){
+    console.log(11)
+    let res = await store.uploadImages(files)
+    data.file = "http://localhost:3000/" + res
+  }
+  
+  let response
+  if($route.path == "/editor"){
+    response = await store.addArticles(data)
+  }else{
+    response  = await store.updateArticles(+$route.params.id,data)
+  }
+   
 
-  let respose = await store.addArticles(data)
-  alert(respose)
+  FfMessage({
+    message:response,
+    type:"success", 
+  })
+
   $router.push({path:"/"})
 }
 type InsertFnType = (url: string, alt: string, href: string) => void

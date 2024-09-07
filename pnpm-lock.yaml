@@ -14,12 +14,21 @@ importers:
       '@wangeditor/editor-for-vue':
         specifier: ^5.1.12
         version: 5.1.12(@wangeditor/editor@5.1.23)(vue@3.4.29(typescript@5.4.5))
+      async-validator:
+        specifier: ^4.2.5
+        version: 4.2.5
       axios:
         specifier: ^1.7.2
         version: 1.7.2
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       path:
         specifier: ^0.12.7
         version: 0.12.7
@@ -39,6 +48,9 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3(vue@3.4.29(typescript@5.4.5))
     devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.7
+        version: 4.17.7
       '@vitejs/plugin-vue':
         specifier: ^5.0.5
         version: 5.0.5(vite@5.3.1(@types/node@20.14.2)(less@4.2.0)(sass@1.77.5))(vue@3.4.29(typescript@5.4.5))
@@ -363,6 +375,9 @@ packages:
   '@types/event-emitter@0.3.5':
     resolution: {integrity: sha512-zx2/Gg0Eg7gwEiOIIh5w9TrhKKTeQh7CPCOPNc0el4pLSwzebA8SmnHwZs2dWlLONvyulykSwGSQxQHLhjGLvQ==}
 
+  '@types/lodash@4.17.7':
+    resolution: {integrity: sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==}
+
   '@types/node@20.14.2':
     resolution: {integrity: sha512-xyu6WAMVwv6AKFLB+e/7ySZVr/0zLCzOa7rSpq6jNwpqOrUbcACDWC+53d4n2QHOnDou0fbIsg8wZu/sxrnI4Q==}
 
@@ -593,6 +608,9 @@ packages:
   assign-symbols@1.0.0:
     resolution: {integrity: sha512-Q+JC7Whu8HhmTdBph/Tq59IoRtoy6KAm5zzPv00WdujX82lbAL8K7WVjne7vdCsAmbF4AYaDOPyO3k0kl8qIrw==}
     engines: {node: '>=0.10.0'}
+
+  async-validator@4.2.5:
+    resolution: {integrity: sha512-7HhHjtERjqlNbZtqNqy2rckN/SpOOlmDliet+lP7k+eKZEjPk3DgyeU9lIXLdeLz0uBbbVp+9Qdow9wJWgwwfg==}
 
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
@@ -1353,6 +1371,9 @@ packages:
     resolution: {integrity: sha512-I5d00Pd/jwMD2QCduo657+YM/6L3KZu++pmX9VFncxaxvHcru9jx1lBaFft+r4Mt2jK0Yhp41XlRAihzPxHNCg==}
     engines: {node: '>=4.0.0'}
 
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
 
@@ -1373,6 +1394,9 @@ packages:
 
   lodash.toarray@4.4.0:
     resolution: {integrity: sha512-QyffEA3i5dma5q2490+SgCvDN0pXLmRGSyAANuVi0HQ01Pkfr9fuoKQW8wm1wGBnJITs/mS7wQvS6VshUEBFCw==}
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   lru-cache@10.2.2:
     resolution: {integrity: sha512-9hp3Vp2/hFQUiIwKo8XCeFVnrg8Pk3TYNPIR7tJADKi5YfcF7vEaK7avFHTlSy3kOKYaJQaalfEo6YuXdceBOQ==}
@@ -2341,6 +2365,8 @@ snapshots:
 
   '@types/event-emitter@0.3.5': {}
 
+  '@types/lodash@4.17.7': {}
+
   '@types/node@20.14.2':
     dependencies:
       undici-types: 5.26.5
@@ -2623,6 +2649,8 @@ snapshots:
       is-shared-array-buffer: 1.0.3
 
   assign-symbols@1.0.0: {}
+
+  async-validator@4.2.5: {}
 
   asynckit@0.4.0: {}
 
@@ -3502,6 +3530,8 @@ snapshots:
       emojis-list: 3.0.0
       json5: 1.0.2
 
+  lodash-es@4.17.21: {}
+
   lodash.camelcase@4.3.0: {}
 
   lodash.clonedeep@4.5.0: {}
@@ -3515,6 +3545,8 @@ snapshots:
   lodash.throttle@4.1.1: {}
 
   lodash.toarray@4.4.0: {}
+
+  lodash@4.17.21: {}
 
   lru-cache@10.2.2: {}
 

@@ -33,7 +33,7 @@
 
       </div>
       <div class="right " style="margin-left: 10px;">
-        <Avatar style="margin-top: 20px;" :length=articleMeta ></Avatar>
+        <Avatar style="margin-top: 20px;" :length=articleMeta @click="a"></Avatar>
         <Poem style="margin-top: 10px;"></Poem>
       </div>
     </div>
@@ -43,7 +43,6 @@
 
 <script setup lang='ts'>
 import Meteor from "@/components/meteor/index.vue"
-
 import Icon from "@/components/svgComponent/index.vue"
 import GarbledText from "@/components/garbledText/index.vue"
 import Pagination from "@/components/Pagination/index.vue"
@@ -56,6 +55,7 @@ import {  ref, } from "vue"
 import { row } from "@/utils/setConstant"
 import dayjs from "dayjs"
 import { useRouter } from "vue-router"
+
 
 
 
@@ -75,14 +75,12 @@ const handleArticle = async (page: number, row: number) => {
   if (!articleInfo.value.length) {
     articleMeta.value.push(res.meta.total)
     articleMeta.value.push(res.meta.categoryTotal)
-
-
   }
   for (const item of articleInfo.value.data) {
     item.content = item.content.replace(/<\/?.+?>/g, "")
     item.createdAt = dayjs(item.createdAt).format("YYYY-MM-DD")
   }
-
+ 
 }
 handleArticle(page.value, row)
 

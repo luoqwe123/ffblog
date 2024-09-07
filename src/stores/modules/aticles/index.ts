@@ -27,8 +27,8 @@ export const articleStore = defineStore('article',{
             let res = await removeArticle(id)
             return res?.data.code ==200?Promise.resolve(res?.data.data.message):Promise.reject("获取失败")
         },
-        async updateArticles(id:number){
-            let res = await reviseArticle(id)
+        async updateArticles(id:number,data:any){
+            let res = await reviseArticle(id,data)
             return res?.data.code ==200?Promise.resolve(res?.data.data.message):Promise.reject("获取失败")
         },
         async uploadImages(file:File){

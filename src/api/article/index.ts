@@ -5,8 +5,8 @@ import request from "@/utils/request";
 
 enum API {
     ADDARTICLE_URL = "/article",
-    REMOVEARTICLE_URL = '/article/?',
-    REVISEARTICLE_URL = "/article/?",
+    REMOVEARTICLE_URL = '/article/',
+    REVISEARTICLE_URL = "/article/",
     QUERYARTICLE_URL = "/article/",  //查询参数添加到url上
     GETARTICLE_URL = "/article/?",  //params参数
     UPLOADIMAGE_URL = "/upload/image"
@@ -18,8 +18,8 @@ export const addArticle = (data: { title: string, content: string, categoryId: n
 export const removeArticle = (id: number) => {
     return request.delete<any, updateArticle>(API.REMOVEARTICLE_URL + id)
 }
-export const reviseArticle = (id: number) => {
-    return request.patch<any, updateArticle>(API.REVISEARTICLE_URL + id)
+export const reviseArticle = (id: number,data:any) => {
+    return request.patch<any, updateArticle>(API.REVISEARTICLE_URL + id,data)
 }
 export const findArticle = (id: number) => {
     return request.get<any, queryArticle>(API.QUERYARTICLE_URL + id)
