@@ -5,10 +5,10 @@
     <div class="home-container">
      
       <div class="top-part">
-        <Meteor />
+        <Meteor :startCount='starCount'/>
       </div>
       <div class="main">
-        <GarbledText textColor="white"></GarbledText>
+        <GarbledText textColor="white" :lineSize="textSize"></GarbledText>
       </div>
 
       <div class="floor">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="part2" :ref=partTwo>
-      <div class="left mr-3 2xl:mr-8" style="margin-top: 10px;">
+      <div class="left mr-3 2xl:mr-8" style="margin-top: 10px;padding: 0 10px;">
         <template v-if="articleInfo?.data">
           <template v-for="item in articleInfo.data" :key="item.id">
 
@@ -28,12 +28,12 @@
         </template>
         <template v-if="articleInfo?.meta">
           <Pagination :total="articleInfo.meta.total" :pageSize="articleInfo.meta.page_row" v-model:current_page="page"
-            @click="handleArticle(page, row)" style="width: 100%;display: flex;justify-content: center;"></Pagination>
+            @click="handleArticle(page, row)" style="width: 100%;display: flex;justify-content: center;" ></Pagination>
         </template>
 
       </div>
-      <div class="right " style="margin-left: 10px;">
-        <Avatar style="margin-top: 20px;" :length=articleMeta @click="a"></Avatar>
+      <div class="right " style="margin-left: 10px;" v-if="isComputer">
+        <Avatar style="margin-top: 20px;" :length=articleMeta ></Avatar>
         <Poem style="margin-top: 10px;"></Poem>
       </div>
     </div>
@@ -51,16 +51,22 @@ import Avatar from "@/components/avatar/index.vue"
 import Poem from "@/components/poem/index.vue"
 import { articleStore } from "@/stores/modules/aticles/index"
 import "./index"
-import {  ref, } from "vue"
+import {  ref,computed } from "vue"
 import { row } from "@/utils/setConstant"
 import dayjs from "dayjs"
 import { useRouter } from "vue-router"
+import { isComputer } from "@/utils/setConstant"
 
 
 
 
 
-
+let starCount = computed(()=>{
+   return isComputer.value?40:20
+})
+let textSize = computed(()=>{
+  return isComputer.value ?30:16
+})
 let $router = useRouter()
 let controlArticle: any = articleStore()
 let page = ref<number>(1)
@@ -99,11 +105,13 @@ const showArticle = (id: any) => {
 </script>
 
 <style lang="scss" scoped>
+
 .part2 {
   width: 100%;
   height: 200vh;
   display: flex;
   justify-content: center;
+  
 }
 
 
@@ -129,6 +137,7 @@ const showArticle = (id: any) => {
   width: 100%;
   background: url(../../../back.jpg);
   background-size: cover;
+  background-position: center;
   position: relative;
 }
 

@@ -141,7 +141,9 @@ const deletePage = ()=>{
     width: 100px;
 }
 .pagination-container{
+    width: 100%;
     display: flex;
+   
 }
 .bg{
     background-color: #f0f2f5;

@@ -23,6 +23,10 @@ router.afterEach(()=>{
 </script>
 
 <style lang="scss" scoped>
+.app{
+    width: 100%;
+    overflow-x: hidden;
+}
 .header {
   position: fixed;
   z-index: 3;

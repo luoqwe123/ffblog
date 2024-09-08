@@ -42,6 +42,7 @@ import Icon from "@/components/svgComponent/index.vue"
 import menuItem from "@/components/menu/menu-item.vue"
 import menuSub from "./menu-sub.vue";
 import { useRouter } from "vue-router";
+import { computed,ref } from "vue";
 const  $router = useRouter()
 const menuData = withDefaults(defineProps<{
     menuList: any;
@@ -58,6 +59,7 @@ const jumpRouter = (path:any)=>{
    
     $router.push(path)
 }
+
 </script>
 
 

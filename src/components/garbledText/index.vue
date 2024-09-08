@@ -1,7 +1,7 @@
 <template>
     <div class="garled-container">
-        <div :style="{ width: 800+'px', textAlign: 'left',color:textColor}" class="garbled">
-            <a :style="{fontSize:lineSize}">{{ htmlStr }}
+        <div :style="{ textAlign: 'left',color:textColor,padding:'0 10px'}" class="garbled md:w-full xl:w-[800px] ">
+            <a :style="{fontSize:lineSize+'px',}">{{ htmlStr }}
                 <span class="textIcon" :style="{fontSize:lineSize}">{{ textIcon }}</span>
             </a>
            
@@ -20,7 +20,7 @@ const getGarbledValue = withDefaults(defineProps<{
     lineFlashCount?: number,
     textColor?: string,
     wordSize?: string,
-    lineSize?: string,
+    lineSize?: number,
 
 }>(), {
     texts: [
@@ -31,7 +31,7 @@ const getGarbledValue = withDefaults(defineProps<{
     deletTextTime: 100,
     lineFlashTime: 400,
     lineFlashCount: 4,
-    lineSize:'30px'
+    lineSize:30
 
 
 })
