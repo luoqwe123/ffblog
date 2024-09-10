@@ -8,10 +8,10 @@
             <div class="name">独断万古柳如烟</div>
         </div>
         <div class="center">
-            <a @click="" v-for="(item, key) in avatarInfo.info" :key="key" class="center-link">
+            <div @click="go(key)" v-for="(item, key) in avatarInfo.info" :key="key" class="center-link" >
                 <div class="headline">{{ item }}</div>
                 <div class="length-num">{{ avatarInfo.length[key] }}</div>
-            </a>
+            </div>
         </div>
         <div class="bottom">
             <a href="mailto:qwe18173945756@163.com" class="bottom-link" style="background-color: #49b1f5; display: flex;justify-content: center;height: 37px;align-items: center;">
@@ -38,22 +38,26 @@
 
 <script setup lang='ts'>
 import {  withDefaults } from "vue"
+import { useRouter } from "vue-router";
+const $router = useRouter()
 const avatarInfo = withDefaults(defineProps<{
     info?: any,
     length: any,
     svgName?: string,
     icon?:any,
     url?:any
+    labelFn?:Function,
 }>(), {
     info: ["文章", "标签"],
     length: [22, 33, 44],
     svgName: "Information",
     icon:["github","gitee"],
-    url:["https://github.com/luoqwe123/ffblog","https://gitee.com/dashboard/projects"]
+    url:["https://github.com/luoqwe123/ffblog","https://gitee.com/dashboard/projects"],
+    labelFn: ()=>{ return } ,
 })
-
-
-
+const go = (key:number)=>{
+    key==1&&$router.push("/label")
+}
 </script>
 
 <style lang="scss" scoped>

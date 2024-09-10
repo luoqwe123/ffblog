@@ -4,8 +4,15 @@
          text-white text-[20px] rounded-[7px] " >
             风风的个人博客
         </div>
-        <Menu :menuList="constant"  class="menu-container"  backgroundColor="none" v-if="isComputer"></Menu>
-        <SVG name="menu" v-if="!isComputer"></SVG>
+        <Menu :menuList="constant"  class="menu-container"  backgroundColor="none" v-if="isComputer" ></Menu>
+        <SVG name="menu" v-if="!isComputer" @click="showDrawer"></SVG>
+        
+        <Drawer v-model="drawer">
+            <template #com>
+                <Menu :menuList="constant"  class="menu-container"  backgroundColor="none" mode="vertical" ></Menu>
+            </template>
+            
+        </Drawer>
 
     </div>
 </template>
@@ -16,7 +23,14 @@ import Menu from "@/components/menu/index.vue"
 import SVG from "@/components/svgComponent/index.vue"
 import { constant } from "@/router/router";
 import { isComputer } from "@/utils/setConstant";
+//import { FfDrawer } from "../drawer";
+import { ref } from "vue";
+import Drawer from "@/components/Drawer/index.vue"
 
+let drawer = ref<boolean>(false)
+const showDrawer = ()=>{
+   drawer.value = true
+}
 
 
 </script>

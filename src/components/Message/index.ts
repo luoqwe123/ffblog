@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import Message from "./Message.vue";
 export const  FfMessage = (props:any,callback?:any)=>{
     let div = document.createElement('div')
-    div.style.transition = "all 1s esae"
+   
     const message = createApp(Message,{
         ...props,
         close

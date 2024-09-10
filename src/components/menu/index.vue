@@ -1,6 +1,6 @@
 <template>
 
-    <ul :style="{ backgroundColor, color: TextColor }" style="height: 100%;" class="menu">
+    <ul :style="{ backgroundColor, color: TextColor }" style="height: 100%;" class="menu" :class="{vertical:posittion}">
         <template v-for="(item, key) in menuData.menuList" :key="item.path">
             <div v-if="item.display" class="menuSub"  style="display: flex;flex-direction: column;justify-content: center;"
                 >
@@ -43,18 +43,22 @@ import menuItem from "@/components/menu/menu-item.vue"
 import menuSub from "./menu-sub.vue";
 import { useRouter } from "vue-router";
 import { computed,ref } from "vue";
+
 const  $router = useRouter()
 const menuData = withDefaults(defineProps<{
     menuList: any;
     backgroundColor?: string;
     TextColor?: string;
     defaultOpeneds?: string;
+    mode?:'horizontal' | 'vertical';
 }>(), {
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     TextColor: 'white',
     defaultOpeneds: '',
+    mode:"horizontal"
 })
-
+let posittion = ref<boolean>(false)
+posittion.value = menuData.mode == "vertical"? true:false
 const jumpRouter = (path:any)=>{
    
     $router.push(path)
@@ -64,6 +68,9 @@ const jumpRouter = (path:any)=>{
 
 
 <style lang="scss" scoped>
+.vertical{
+    flex-direction: column;
+}
 .menu {
     display: flex;
 }
