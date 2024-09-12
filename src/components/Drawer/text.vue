@@ -1,10 +1,12 @@
 <template>
+    
     <div class="drawer">
         <div class="left" @click="close"></div>
         <div class="right">
             <slot></slot>
         </div>
     </div>
+
 </template>
 
 <script setup lang='ts'>
@@ -21,13 +23,15 @@ const close = ()=>{
 </script>
 
 <style lang="scss" scoped>
-.drawer-container{
+
+.drawer{
     width: 100%;
     height: 100vh;
     position: fixed;
     z-index: 99;
     display: flex;
     top: 0;
+    
 }
 .left{
     width: 20%;

@@ -1,5 +1,5 @@
 <template>
-    <div class="Avatar-container">
+    <div class="Avatar-container" :style="{width:avaterWidth,height:avaterHeight,borderRadius:avaterBorderRadius}">
         <div class="top">
             <div class="top-picture">
                 <img src="../../../public/168.jpg" alt="" class="avatar">
@@ -13,8 +13,9 @@
                 <div class="length-num">{{ avatarInfo.length[key] }}</div>
             </div>
         </div>
-        <div class="bottom">
-            <a href="mailto:qwe18173945756@163.com" class="bottom-link" style="background-color: #49b1f5; display: flex;justify-content: center;height: 37px;align-items: center;">
+        <div class="bottom" style="padding-left: 5px;">
+            <a href="mailto:qwe18173945756@163.com" class="bottom-link" style="background-color: #49b1f5; display: flex;
+                justify-content: center;height: 37px;align-items: center;">
                 <i class="icon" style="display: flex;align-items: center;justify-content: center;">
                     <svg style="height: 26px;width: 22px;">
                         <use :xlink:href="'#icon-' + avatarInfo.svgName" fill="#49b1f5"></use>
@@ -47,6 +48,9 @@ const avatarInfo = withDefaults(defineProps<{
     icon?:any,
     url?:any
     labelFn?:Function,
+    avaterWidth?:string,
+    avaterHeight?:string,
+    avaterBorderRadius?:string
 }>(), {
     info: ["文章", "标签"],
     length: [22, 33, 44],
@@ -54,6 +58,9 @@ const avatarInfo = withDefaults(defineProps<{
     icon:["github","gitee"],
     url:["https://github.com/luoqwe123/ffblog","https://gitee.com/dashboard/projects"],
     labelFn: ()=>{ return } ,
+    avaterHeight:"390px",
+    avaterWidth:'290px',
+    avaterBorderRadius:'10px'
 })
 const go = (key:number)=>{
     key==1&&$router.push("/label")
@@ -112,8 +119,8 @@ const go = (key:number)=>{
 
 .avatar {
 
-    height: 136px;
-    width: 136px;
+    height: 140px;
+    width: 140px;
     border-radius: 50%;
 }
 
@@ -123,12 +130,11 @@ const go = (key:number)=>{
 }
 
 .Avatar-container {
-    width: 290px;
-    height: 378px;
+   
    
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px rgba(0, 0, 0, 0.1) solid;
-    border-radius: 10px;
+   
     padding: 20px 24px;
 }
 </style>
