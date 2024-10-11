@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang='ts'>
-import { Value } from 'sass';
-import { onMounted, ref } from 'vue';
+
+import {  ref } from 'vue';
 let image = ['119jpg.jpg', "152.jpg", "one.jpg", "168.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg"]
-let baseUrl = "../../../public/"
+let baseUrl = "../../../"
 let active = ref(2)
 let activeZ = ref(200)
 let mobile = ref(0)

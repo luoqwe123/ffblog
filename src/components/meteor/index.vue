@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, onMounted, withDefaults, watch } from "vue"
+import { ref, onMounted, watch } from "vue"
 import { offMeteor } from "@/perminsstion";
 let cvs = ref()
 const meteorsProperties = withDefaults(defineProps<{

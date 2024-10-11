@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, withDefaults } from "vue"
+import { ref } from "vue"
 
 const getGarbledValue = withDefaults(defineProps<{
     texts?: any,   // texts?: Record<string, unknown> 如果类型是对象

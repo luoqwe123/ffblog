@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, withDefaults,onMounted } from "vue"
+import { ref,onMounted } from "vue"
 import { isComputer } from "@/utils/setConstant";
 
 let showInco = ref(false)

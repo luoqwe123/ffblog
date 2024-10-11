@@ -44,9 +44,9 @@ import Icon from "@/components/svgComponent/index.vue"
 import MenuItem from "@/components/menu/menu-item.vue"
 import MenuSub from "./menu-sub.vue";
 import { useRouter } from "vue-router";
-import { computed, ref, defineEmits } from "vue";
+import { computed, ref } from "vue";
 import { isComputer } from "@/utils/setConstant"
-import { values } from "lodash";
+
 
 
 let IconColor = computed(()=>{

@@ -10,7 +10,7 @@
 
 <script setup lang='ts'>
 //命令式组件
-import { defineProps, onMounted,ref } from 'vue';
+import { defineProps, ref } from 'vue';
 const props = defineProps({
     message: {
         type: String,

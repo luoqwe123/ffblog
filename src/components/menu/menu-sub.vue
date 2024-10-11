@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang='ts'>
-import { withDefaults, ref, Transition } from "vue"
+import {  ref,  } from "vue"
 import Icon from "../svgComponent/index.vue"
 import { isComputer } from "@/utils/setConstant";
 

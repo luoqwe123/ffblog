@@ -25,7 +25,7 @@
 import Schema, { type RuleItem } from "async-validator";
 import { includes, keys, isArray, cloneDeep,some } from "lodash";
 import { get, isNil, isString, size, map, filter, } from "lodash";
-import { inject, onMounted, ref, computed, onUnmounted, type Ref, nextTick, provide, compile, } from 'vue';
+import { inject, onMounted, ref, computed, onUnmounted, type Ref, nextTick, provide,  } from 'vue';
 defineOptions({
     name: "ffFormitem"
 })
