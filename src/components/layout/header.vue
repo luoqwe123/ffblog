@@ -4,9 +4,9 @@
          text-white text-[20px] rounded-[7px] " >
             风风的个人博客
         </div>
-        <Menu :menuList="constant"  class="menu-container"  backgroundColor="none" v-if="isComputer" menuWidth="26rem"></Menu>
-        <SVG name="menu" v-if="!isComputer" @click="showDrawer"></SVG>
-        <Drawer v-model="drawer">
+        <Menu :menuList="constant"  class="menu-container"  backgroundColor="none" v-if="!isMobile" menuWidth="26rem"></Menu>
+        <SVG name="menu" v-if="isMobile" @click="showDrawer"></SVG>
+        <Drawer v-model="drawer" >
             <template #avater>
                 <Avater avaterWidth="100%" avaterHeight="60%" avaterBorderRadius="none" ></Avater>
             </template>
@@ -15,18 +15,20 @@
             </template>
         </Drawer>
     </div>
+   
 </template>
 
 <script setup lang='ts'>
-
+import { useScreenSize } from "@/hooks/useSreenSize"
 import Menu from "@/components/menu/index.vue"
 import SVG from "@/components/svgComponent/index.vue"
 import { constant } from "@/router/router";
-import { isComputer } from "@/utils/setConstant";
 //import { FfDrawer } from "../drawer";
 import { ref } from "vue";
 import Drawer from "@/components/Drawer/index.vue"
 import Avater from "@/components/avatar/index.vue"
+const { isMobile }  = useScreenSize()
+
 
 let drawer = ref<boolean>(false)
 const showDrawer = ()=>{

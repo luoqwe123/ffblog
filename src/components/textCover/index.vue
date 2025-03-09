@@ -1,12 +1,12 @@
 <template>
-    <div class="textShow-container h-[255px] 2xl:h-[285px]" @mouseenter="() => { showInco = true }"
+    <div class="textShow-container h-[220px]  2xl:h-[285px]" @mouseenter="() => { showInco = true }"
         @mouseleave="() => { showInco = false; }">
         <template v-for="(item) in arrLayout">
             <div class="cover" v-if="(item == 'picture')" :style="{
                 borderTopLeftRadius: imgHorn ? 10 + 'px' : 0,borderBottomLeftRadius: imgHorn ? 10 + 'px' : 0,
                 borderTopRightRadius: !imgHorn ? 10 + 'px' : 0,borderBottomRightRadius: !imgHorn ? 10 + 'px' : 0,
             }">
-                <img :data_src=src class="picture" ref="cover" >
+                <img :src=src class="picture" ref="cover" loading="lazy">
             </div>
             <div class="content" v-if="(item == 'content')">
                 <div class="articleTitle" @mouseenter="() => { IncoColor = true }"
@@ -27,11 +27,9 @@
                             </svg>
                         </i>
                         <span style="font-family: -apple-system, BlinkMacSystemFont, 'Varela Round', Ubuntu, 'Microsoft YaHei', 'Segoe UI', 'Helvetica Neue', Roboto, sans-serif;
-                        font-style: italic;color: #858585;
-                        ">
-                        
-                        {{
-                            textCoverInfo.info[item] }}</span>
+                        font-style: italic;color: #858585;overflow: hidden; "
+                        >
+                        {{textCoverInfo.info[item] }}</span>
                         <span v-if="item < arr.length - 1" class="separate"
                             style="margin-left: 5px;color: #858585;">|</span>
                     </template>
@@ -46,8 +44,8 @@
 </template>
 
 <script setup lang='ts'>
-import { ref,onMounted } from "vue"
-import { isComputer } from "@/utils/setConstant";
+import { ref,} from "vue"
+
 
 let showInco = ref(false)
 let IncoColor = ref(false)
@@ -75,25 +73,21 @@ if(textCoverInfo.image!=""){
     src.value = "../../../4.jpg"
 }
 src.value = textCoverInfo.image!=""?textCoverInfo.image:"../../../4.jpg"
-onMounted(()=>{
- const callback = (item:any)=>{
-        const  image = item[0].target
-        const data_src = image.getAttribute("data_src")
-        image.setAttribute('src',data_src)
-        observer.unobserve(image)
-    }
-    const observer = new IntersectionObserver( callback,{
-        threshold: 1
-    } )
-    observer.observe(cover.value[0])
-})
+// onMounted(()=>{
+//  const callback = (item:any)=>{
+//         const  image = item[0].target
+//         const data_src = image.getAttribute("data_src")
+//         image.setAttribute('src',data_src)
+//         observer.unobserve(image)
+//     }
+//     const observer = new IntersectionObserver( callback,{
+//         threshold: 1
+//     } )
+//     observer.observe(cover.value[0])
+// })
 let arrLayout = ref<any>([])
 arrLayout.value = textCoverInfo.sequential % 2 == 0 ? ["content", "picture"] : ["picture", "content"]
 
-if(!isComputer.value){
-   
-    arrLayout.value = ["picture", "content"]
-}
 let imgHorn = arrLayout.value[0] == "picture" ? true : false
 let arr: any = []
 const createArr = () => {
@@ -109,46 +103,6 @@ arr = createArr()
 
 <style lang="scss" scoped>
 
-@media screen and (max-width:900px){
-    .textShow-container{
-       
-        flex-direction: column;
-        width: 355px;
-       
-        align-items: center;
-        margin-left: 16px;
-        height: 400px;
-    }
-    .content{
-        width: 100%;
-        padding: 0 10px !important;
-        justify-content:flex-start !important;
-        .articleTitle{
-            font-size: 19px;
-            margin-top: 20px;
-        }
-        .articleInfo{
-            margin-top: 12px;
-        }
-        .articleContent{
-            font-size: 14px;
-            margin-top: 10px;
-        }
-    }
-    .cover{
-        border-top-left-radius: 10px !important;
-        border-top-right-radius: 10px !important;
-        border-bottom-left-radius: 0px !important;
-        width: 100% !important;
-        height: 500px !important;
-        aspect-ratio: none !important;
-        img{
-            width: 100% !important;
-            height: 100% !important;
-        }
-    }
-
-}
 
 .articleContent {
     overflow: hidden;
@@ -191,11 +145,16 @@ arr = createArr()
 
 .textShow-container {
 
-    aspect-ratio: 3.8; //纵横比
+    // aspect-ratio: 3.8; //纵横比
     display: flex;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     border: 0.5px rgba(0, 0, 0, 0.1) solid;
+    width: 96%;
+    display: flex;
+    justify-content: center;
+    min-width: 532px;
+    max-width: calc(100/42*315px);
 }
 
 .articleTitle:hover {
@@ -211,16 +170,18 @@ arr = createArr()
 }
 
 .content {
-    aspect-ratio: 2.37;
+    width: 58%;
     height: 100%;
-    padding: 40px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     justify-content:space-around;
+   
 }
 
 .cover {
-    aspect-ratio: 1.46;
+   
+    width: 42%;
     height: 100%;
     overflow: hidden;
 
@@ -233,4 +194,52 @@ arr = createArr()
     overflow: hidden;
 
 }
+
+
+
+
+
+
+
+// @media screen and (max-width:900px){
+//     .textShow-container{
+       
+//         flex-direction: column;
+//         width: 355px;
+       
+//         align-items: center;
+//         margin-left: 16px;
+//         height: 400px;
+//     }
+//     .content{
+//         width: 100%;
+//         padding: 0 10px !important;
+//         justify-content:flex-start !important;
+//         .articleTitle{
+//             font-size: 19px;
+//             margin-top: 20px;
+//         }
+//         .articleInfo{
+//             margin-top: 12px;
+//         }
+//         .articleContent{
+//             font-size: 14px;
+//             margin-top: 10px;
+//         }
+//     }
+//     .cover{
+//         border-top-left-radius: 10px !important;
+//         border-top-right-radius: 10px !important;
+//         border-bottom-left-radius: 0px !important;
+//         width: 100% !important;
+//         height: 500px !important;
+//         aspect-ratio: none !important;
+//         img{
+//             width: 100% !important;
+//             height: 100% !important;
+//         }
+//     }
+
+// }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="Avatar-container" :style="{width:avaterWidth,height:avaterHeight,borderRadius:avaterBorderRadius}">
+    <div class="Avatar-container" :style="{width:avatarWidth,height:avatarHeight,borderRadius:avatarBorderRadius}">
         <div class="top">
             <div class="top-picture">
                 <img src="../../../public/168.jpg" alt="" class="avatar">
@@ -9,8 +9,8 @@
         </div>
         <div class="center">
             <div @click="go(key)" v-for="(item, key) in avatarInfo.info" :key="key" class="center-link" >
-                <div class="headline">{{ item }}</div>
-                <div class="length-num">{{ avatarInfo.length[key] }}</div>
+                <div class="headline">{{ key }}</div>
+                <div class="length-num">{{ item }}</div>
             </div>
         </div>
         <div class="bottom" style="padding-left: 5px;">
@@ -26,10 +26,10 @@
 
         </div>
         <div class="end" style="display: flex; justify-content: space-around;align-items: center;margin-top: 10px;">
-            <a :href=url[key] v-for="(item,key) in avatarInfo.icon" :key="key" style="display: flex;align-items: center;">
+            <a :href=item v-for="(item, key) in avatarInfo.icon" :key="key" style="display: flex;align-items: center;" target="_blank">
                 <i class="end-icon" style="display: flex;align-items: center;justify-content: center;">
                     <svg style="height: 28px;width: 28px;">
-                        <use :xlink:href="'#icon-' + item" fill="#49b1f5"></use>
+                        <use :xlink:href="'#icon-' + key" fill="#49b1f5"></use>
                     </svg>
                 </i>
             </a>
@@ -40,24 +40,21 @@
 <script setup lang='ts'>
 import {  withDefaults } from "vue"
 import { useRouter } from "vue-router";
+
 const $router = useRouter()
 const avatarInfo = withDefaults(defineProps<{
-    info?: any,
-    length: any,
-    svgName?: string,
-    icon?:any,
-    url?:any
-    labelFn?:Function,
-    avaterWidth?:string,
-    avaterHeight?:string,
-    avaterBorderRadius?:string
+    info?: any; // 键为任意字符串，值为数字
+    svgName?: string;
+    icon?: any;
+    labelFn?: () => string; // 返回字符串的函数
+    avatarWidth?: string;  // 修正拼写
+    avatarHeight?: string; // 修正拼写
+    avatarBorderRadius?: string;
 }>(), {
-    info: ["文章", "标签"],
-    length: [22, 33, 44],
+    info: {"文章":12, "标签":13},
     svgName: "Information",
-    icon:["github","gitee"],
-    url:["https://github.com/luoqwe123/ffblog","https://gitee.com/dashboard/projects"],
-    labelFn: ()=>{ return } ,
+    icon:{'github':"https://github.com/luoqwe123/ffblog",'gitee':"https://gitee.com/dashboard/projects"},
+    labelFn: ()=>{ return ''} ,
     avaterHeight:"390px",
     avaterWidth:'290px',
     avaterBorderRadius:'10px'

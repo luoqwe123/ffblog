@@ -1,4 +1,4 @@
-import { defineConfig, UserConfigExport, ConfigEnv, preprocessCSS } from 'vite'
+import { defineConfig, } from 'vite'
 import vue from '@vitejs/plugin-vue'
 //引入svg需要用到的插件
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
@@ -28,6 +28,12 @@ export default defineConfig({ //command用于检测当前的开发环境
       },
     },
   },
+  build:{
+    rollupOptions:{
+      //确保 tree shaking 生效
+      treeshake:true
+    }
+  }
 
 
 })

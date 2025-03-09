@@ -1,6 +1,6 @@
 <template>
     <div class="garled-container">
-        <div :style="{ textAlign: 'left',color:textColor,padding:'0 10px'}" class="garbled md:w-full xl:w-[800px] ">
+        <div :style="{ textAlign: 'left',color:textColor,padding:'0 10px'}" class="garbled">
             <a :style="{fontSize:lineSize+'px',}">{{ htmlStr }}
                 <span class="textIcon" :style="{fontSize:lineSize}">{{ textIcon }}</span>
             </a>
@@ -79,9 +79,15 @@ useGarbled()
 </script>
 
 <style lang="scss" scoped>
+.garled-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .garbled{
     display: flex;
     justify-content: center;
+    width: 80%;
 }
 
 </style>

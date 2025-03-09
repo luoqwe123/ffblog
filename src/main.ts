@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import "./styles/tail.css"
 import  './styles/globalStyle.scss'
+import './styles/variable.scss'
 
 import './style.css'
 import App from './App.vue'

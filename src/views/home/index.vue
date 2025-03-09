@@ -1,11 +1,11 @@
 <template>
- 
-  <div class="home" > 
-   
+
+  <div class="home">
+
     <div class="home-container">
-     
+
       <div class="top-part">
-        <Meteor :startCount='starCount'/>
+        <Meteor :startCount='starCount' />
       </div>
       <div class="main">
         <GarbledText textColor="white" :lineSize="textSize"></GarbledText>
@@ -15,26 +15,29 @@
         <Icon name="downIcon" fill="white" width="30" height="30"></Icon>
       </div>
     </div>
-    <div class="part2" :ref=partTwo>
-      <div class="left mr-3 2xl:mr-8" style="margin-top: 10px;padding: 0 10px;">
+    <div class="part2" :ref=partTwo style="padding: 0 10px;">
+      <div class="part2-main" style="display: flex;width: 100%;justify-content: center;">
+        <div class="left" style="margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
         <template v-if="articleInfo?.data">
           <template v-for="item in articleInfo.data" :key="item.id">
 
-            <ArticleCover @click="showArticle(item.id)" style="margin-top: 12px;" :sequential="item.id"
+            <ArticleCover @click="showArticle(item.id)" style="margin-top: var(--margin-top);" :sequential="item.id"
               :title="item.title" :content="item.content" :info=[item.createdAt,item.category.title] :image=item.image>
             </ArticleCover>
           </template>
-
         </template>
+      </div>
+      <div class="right " style="margin-left: 6px;align-items: center;display: flex;flex-direction: column;" v-if="!isMobile" >
+        <Avatar style="width: 360px;height: 380px;margin-top: var(--margin-top);" :info=articleMeta></Avatar>
+        <Poem style="margin-top: 10px;"></Poem>
+      </div>
+      </div>
+      
+      <div class="part2-floor" style="width: 100%;display: flex;justify-content: center;align-items: center;">
         <template v-if="articleInfo?.meta">
           <Pagination :total="articleInfo.meta.total" :pageSize="articleInfo.meta.page_row" v-model:current_page="page"
-            @click="handleArticle(page, row)" style="width: 100%;display: flex;justify-content: center;" ></Pagination>
+            @click="handleArticle(page, row)" style="width: 100%;display: flex;justify-content: center;"></Pagination>
         </template>
-
-      </div>
-      <div class="right " style="margin-left: 10px;" v-if="isComputer">
-        <Avatar style="margin-top: 20px;" :length=articleMeta ></Avatar>
-        <Poem style="margin-top: 10px;"></Poem>
       </div>
     </div>
   </div>
@@ -51,42 +54,50 @@ import Avatar from "@/components/avatar/index.vue"
 import Poem from "@/components/poem/index.vue"
 import { articleStore } from "@/stores/modules/aticles/index"
 import "./index"
-import {  ref,computed } from "vue"
+import { ref, computed, watchEffect } from "vue"
 import { row } from "@/utils/setConstant"
 import dayjs from "dayjs"
 import { useRouter } from "vue-router"
 import { isComputer } from "@/utils/setConstant"
+import { useScreenSize } from "@/hooks/useSreenSize"
+
+const { isMobile } = useScreenSize()
+
+interface articleInfo {
+  code: number,
+  data: object[]
+  meta: object
+}
 
 
-
-
-
-let starCount = computed(()=>{
-   return isComputer.value?40:20
+let starCount = computed(() => {
+  return !isMobile.value ? 40 : 20
 })
-let textSize = computed(()=>{
-  return isComputer.value ?30:16
+let textSize = computed(() => {
+  return !isMobile.value ? 30 : 16
 })
 let $router = useRouter()
 let controlArticle: any = articleStore()
 let page = ref<number>(1)
 let articleInfo = ref()
-let articleMeta = ref<any>([])
+let articleMeta = ref<any>({})
 let partTwo = ref()
 
 const handleArticle = async (page: number, row: number) => {
   let res = await controlArticle.getArticleList(page, row)
   articleInfo.value = res
+  console.log("info", articleInfo.value.data)
 
-  if (!articleInfo.value.length) {
-    articleMeta.value.push(res.meta.total)
-    articleMeta.value.push(res.meta.categoryTotal)
-  }
+  articleMeta.value['文章'] = res.meta.total
+  articleMeta.value['标签'] = res.meta.categoryTotal
+
   for (const item of articleInfo.value.data) {
     item.content = item.content.replace(/<\/?.+?>/g, "")
     item.createdAt = dayjs(item.createdAt).format("YYYY-MM-DD")
   }
- 
+  console.log("info", articleInfo.value)
+  console.log("meta", articleMeta.value)
+
 }
 handleArticle(page.value, row)
 
@@ -105,13 +116,12 @@ const showArticle = (id: any) => {
 </script>
 
 <style lang="scss" scoped>
-
 .part2 {
   width: 100%;
   height: 200vh;
   display: flex;
-  justify-content: center;
-  
+  flex-direction: column;
+
 }
 
 

@@ -156,7 +156,7 @@ const deletePage = ()=>{
     height: 40px;
 }
 .bg:hover{
-    color: #409eff;
+    color: #f8ca72;
 }
 
 </style>

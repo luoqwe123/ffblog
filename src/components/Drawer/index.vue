@@ -1,7 +1,7 @@
 <template>
     <div v-if="props.modelValue" class="drawer-container">
 
-        <div class="blackFog"  @click="closeDrawer()"></div>
+        <div class="blackFog" @click="closeDrawer()"></div>
 
         <div class="drawer" :class="{ open: t }" @click.stop>
             <slot name="avater"></slot>
@@ -10,8 +10,8 @@
     </div>
 </template>
 
-<script setup>
-import { ref, watch, onMounted } from 'vue';
+<script setup lang="ts">
+import { ref, watch,  watchEffect } from 'vue';
 import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
@@ -24,18 +24,13 @@ const props = defineProps({
 
 let t = ref(false)
 
-watch(
-    () => props.modelValue,
-    () => {
-        if (props.modelValue) {
+watchEffect(()=>{
+    if (props.modelValue) {
             setTimeout(() => {
-
                 t.value = true;
-
             }, 0)
         }
-    }
-)
+})
 
 
 watch(
@@ -50,10 +45,10 @@ const emit = defineEmits(['update:modelValue']);
 
 const closeDrawer = () => {
     t.value = false
-    setTimeout(()=>{
-        emit('update:modelValue', false);
-    },240)
    
+        emit('update:modelValue', false);
+  
+
 
 };
 
@@ -61,37 +56,46 @@ const closeDrawer = () => {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .drawer-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);  
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
-    overflow:auto;
+    overflow: auto;
 
 }
 
 .blackFog {
-    width: 20%;
+    width: 100%;
 }
 
 .drawer {
+    position: absolute;
+    right: 0px;
     background: white;
-    width: 80%;
+    width: 400px;
     height: 100%;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    transition: all .24s ;
-    transform: translateX(99%);
-    
+    animation: drawer linear .5s ;
+   
+}
+@keyframes drawer{
+    from{
+        transform: translateX(100%);
+    }
+    to{
+        transform: translateX(0);
+    }
 }
 
 
-.open{
-    transform: translateX(0) !important;
+.open {
+    /* transform: translateX(0) !important; */
 }
 </style>
