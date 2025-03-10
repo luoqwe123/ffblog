@@ -15,24 +15,24 @@
         <Icon name="downIcon" fill="white" width="30" height="30"></Icon>
       </div>
     </div>
-    <div class="part2" :ref=partTwo style="padding: 0 10px;">
+    <div class="part2" :ref=partTwo style="padding: 0 10px;" @wheel="handleScroll">
       <div class="part2-main" style="display: flex;width: 100%;justify-content: center;">
-        <div class="left" style="margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
-        <template v-if="articleInfo?.data">
-          <template v-for="item in articleInfo.data" :key="item.id">
-
-            <ArticleCover @click="showArticle(item.id)" style="margin-top: var(--margin-top);" :sequential="item.id"
-              :title="item.title" :content="item.content" :info=[item.createdAt,item.category.title] :image=item.image>
-            </ArticleCover>
+        <div class="part2-left" style="display: flex;flex-direction: column;align-items: center;min-width: 550px;">
+          <template v-if="articleInfo?.data">
+            <template v-for="item in articleInfo.data" :key="item.id">
+              <ArticleCover @click="showArticle(item.id)" style="margin-top: var(--margin-top);" :sequential="item.id"
+                :title="item.title" :content="item.content" :info=[item.createdAt,item.category.title]
+                :image=item.image>
+              </ArticleCover>
+            </template>
           </template>
-        </template>
+        </div>
+        <div class="right " style="margin-left: 6px;align-items: center;display: flex;flex-direction: column;"
+          v-if="!isMobile">
+          <Avatar style="width: 360px;height: 380px;margin-top: var(--margin-top);" :info=articleMeta></Avatar>
+          <Poem style="margin-top: 10px;"></Poem>
+        </div>
       </div>
-      <div class="right " style="margin-left: 6px;align-items: center;display: flex;flex-direction: column;" v-if="!isMobile" >
-        <Avatar style="width: 360px;height: 380px;margin-top: var(--margin-top);" :info=articleMeta></Avatar>
-        <Poem style="margin-top: 10px;"></Poem>
-      </div>
-      </div>
-      
       <div class="part2-floor" style="width: 100%;display: flex;justify-content: center;align-items: center;">
         <template v-if="articleInfo?.meta">
           <Pagination :total="articleInfo.meta.total" :pageSize="articleInfo.meta.page_row" v-model:current_page="page"
@@ -49,20 +49,18 @@ import Meteor from "@/components/meteor/index.vue"
 import Icon from "@/components/svgComponent/index.vue"
 import GarbledText from "@/components/garbledText/index.vue"
 import Pagination from "@/components/Pagination/index.vue"
-import ArticleCover from "@/components/textCover/index.vue"
 import Avatar from "@/components/avatar/index.vue"
 import Poem from "@/components/poem/index.vue"
 import { articleStore } from "@/stores/modules/aticles/index"
 import "./index"
-import { ref, computed, watchEffect } from "vue"
+import { ref, computed, } from "vue"
 import { row } from "@/utils/setConstant"
 import dayjs from "dayjs"
 import { useRouter } from "vue-router"
-import { isComputer } from "@/utils/setConstant"
 import { useScreenSize } from "@/hooks/useSreenSize"
-
+import ArticleCover from "@/components/textCover/index.vue"
 const { isMobile } = useScreenSize()
-
+const startArticleNum = ref<number>(4)
 interface articleInfo {
   code: number,
   data: object[]
@@ -83,21 +81,21 @@ let articleInfo = ref()
 let articleMeta = ref<any>({})
 let partTwo = ref()
 
+
+const handleScroll = ()=>{
+  if(partTwo.value){
+    console.log(partTwo.value.scrollTop)
+  }
+}
 const handleArticle = async (page: number, row: number) => {
   let res = await controlArticle.getArticleList(page, row)
   articleInfo.value = res
-  console.log("info", articleInfo.value.data)
-
   articleMeta.value['文章'] = res.meta.total
   articleMeta.value['标签'] = res.meta.categoryTotal
-
   for (const item of articleInfo.value.data) {
     item.content = item.content.replace(/<\/?.+?>/g, "")
     item.createdAt = dayjs(item.createdAt).format("YYYY-MM-DD")
   }
-  console.log("info", articleInfo.value)
-  console.log("meta", articleMeta.value)
-
 }
 handleArticle(page.value, row)
 

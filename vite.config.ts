@@ -31,8 +31,21 @@ export default defineConfig({ //command用于检测当前的开发环境
   build:{
     rollupOptions:{
       //确保 tree shaking 生效
-      treeshake:true
-    }
+      treeshake:true,
+      
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          home: ['@/views/home/index.vue'], // 首页单独打包
+        },
+      },
+    },
+    minify: 'terser', // 确保代码压缩
+    // terserOptions: {
+    //   compress: {
+    //     drop_console: true, // 移除 console.log
+    //   },
+    // },
   }
 
 
