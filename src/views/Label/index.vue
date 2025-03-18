@@ -1,7 +1,7 @@
 <template>
     <div class="Label-container" style="width: 100%;height: 100vh;padding: 5% 12%;display: flex;">
 
-        <ul style="width: 60%;height: 100%;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);border-radius: 10px;
+        <ul class="left" style="height: 100%;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);border-radius: 10px;
             border: 0.5px rgba(0, 0, 0, 0.1) solid;padding: 3% 4%;overflow: hidden;">
             <template v-if="categoryList!=''">
                 <li style="height: 48px;width: 100%;display: flex;align-items: center;cursor: pointer;"
@@ -19,7 +19,7 @@
 
 
         </ul>
-        <div class="right" style="margin-left: 16px;">
+        <div class="right hidden md:block" style="margin-left: 16px;">
             <Avatar style="margin-bottom: 12px;" :length></Avatar>
             <Poem />
         </div>
@@ -67,5 +67,13 @@ li:hover {
 }
 .picture:hover{
     transform: scale(1.2);
+}
+.left{
+    width: 60%;
+}
+@media screen and (max-width: 768px) {
+    .left {
+        width: 100%;
+    }
 }
 </style>

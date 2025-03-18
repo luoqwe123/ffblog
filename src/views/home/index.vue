@@ -27,7 +27,7 @@
             </template>
           </template>
         </div>
-        <div class="right " style="margin-left: 6px;align-items: center;display: flex;flex-direction: column;"
+        <div class="right" style="margin-left: 6px;align-items: center;display: flex;flex-direction: column;"
           v-if="!isMobile">
           <Avatar style="width: 360px;height: 380px;margin-top: var(--margin-top);" :info=articleMeta></Avatar>
           <Poem style="margin-top: 10px;"></Poem>

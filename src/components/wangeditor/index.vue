@@ -3,7 +3,7 @@
     <div style=" width: 100%;height: 100vh;margin-top: 10px;display: flex;flex-direction: column;align-items: center;">
       <Toolbar :editor="editorRef" :defaultConfig="toolbarConfig" style="border-bottom: 1px solid #ccc;width: 100%;;display: flex;flex-wrap: nowrap;
         justify-content: center;" />
-      <div class="content" style="margin-top: 20px;width: 80%;height: 72%;display: flex;flex-direction: column; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      <div class="content" style="margin-top: 20px;height: 72%;display: flex;flex-direction: column; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;border: 0.5px rgba(0, 0, 0, 0.1) solid;">
         <input type="text" placeholder="请输入标题" v-model="title"
           style="border-bottom: 1px solid #ccc;padding-left: 10px;margin-top: 10px;width: 100%;height: 55px;outline: none;">
@@ -12,9 +12,9 @@
           @onCreated="handleCreated">
         </Editor>
       </div>
-      <div class="prop md:w-[325px] sm:w-[282px] " style="padding: 20px;margin-top: 20px;height: 227px;display: flex;flex-direction: column;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      <div class="prop" style="padding: 20px;margin-top: 20px;height: 340px;display: flex;flex-direction: column;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;border: 0.5px rgba(0, 0, 0, 0.1) solid;align-items: start;justify-content: space-around;">
-        <div class="label" style="margin-top: 8px;">
+        <div class="label" style="margin-top: 8px;margin-bottom: 8px;">
           <label style="opacity: 0.6;font-size: medium;">文章标签：</label>
           <select name="" id="" v-model="label" style="outline: none;">
             <option :value=label>
@@ -27,11 +27,11 @@
             </template>
           </select>
         </div>
-        <div class="addCover" style="display: flex;margin-top: 12px;">
+        <div class="addCover" style=" display: flex;margin-top: 12px;width: 100%;height: 200px;">
           <label for="" style="opacity: 0.6;font-size: medium;height: 80px">
             <span>添加封面：</span>
           </label>
-          <button :style="{ backgroundColor: '#f7f7f7', width: 160 + 'px', height: 80 + 'px', }" @click="addCover">
+          <button :style="{ backgroundColor: '#f7f7f7', width: '65%', height: '85%', }" @click="addCover">
             <div v-if="!imageUrl">
               <i style="opacity: 0.6;font-size:larger;">+</i>
               <p style="font-size: small;opacity: 0.6;">添加文章封面</p>
@@ -40,10 +40,14 @@
           </button>
           <input type="file" ref="ipt" style="display: none;" accept=".png,.jpg,.jpeg,.gif" @change="changeImage">
         </div>
-        <div class="confirm" @click="send"
-          style="cursor: pointer;margin-left: 80px;margin-top:16px;height: 40px;
-          width: 96px; background-color: #fc5531;border-radius: 20px;color: white;padding: 8px;" >
-          发布博客</div>
+        <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+          <div class="confirm" id="fixedSend" @click="fixedSend"
+            style="cursor: pointer;height: 44px;width: 100px;border-radius: 20px;color: #999AAA;padding: 8px;border-width: 2px;margin-right: 40px;">
+            定时发布</div>
+          <div class="confirm" @click="send"
+            style="cursor: pointer;height: 40px;width: 96px; background-color: #fc5531;border-radius: 20px;color: white;padding: 8px;">
+            发布博客</div>
+        </div>
       </div>
     </div>
   </div>
@@ -56,7 +60,7 @@ import { onBeforeUnmount, ref, shallowRef, } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { articleStore } from '@/stores/modules/aticles';
 import { categoryStore } from '@/stores/modules/category';
-import { useRoute,useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { FfMessage } from '../Message';
 let $route = useRoute()
 let $router = useRouter()
@@ -84,13 +88,13 @@ const getCategory = async () => {
     valueHtml.value = res.data.content
     imageUrl.value = res.data.image == "" ? "../../../4.jpg" : res.data.image
 
-  } 
-    let res = await cStore.getCategorys()
-    for (const item of res.data) {
-      categoryInfo.value.push(item)
-    }
+  }
+  let res = await cStore.getCategorys()
+  for (const item of res.data) {
+    categoryInfo.value.push(item)
+  }
 
-  
+
 
 }
 
@@ -128,33 +132,38 @@ onBeforeUnmount(() => {
 const handleCreated = (editor: string) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
-
+const fixedSend = () => {
+  FfMessage({
+    message: "暂未开放",
+    type: "error",
+  })
+}
 const send = async () => {
   let files = ipt.value.files[0]
   let data: any = {}
   data.title = title.value
   data.content = valueHtml.value
   data.categoryId = label.value
-  if(files != undefined){
+  if (files != undefined) {
     console.log(11)
     let res = await store.uploadImages(files)
     data.file = "http://localhost:3000/" + res
   }
-  
+
   let response
-  if($route.path == "/editor"){
+  if ($route.path == "/editor") {
     response = await store.addArticles(data)
-  }else{
-    response  = await store.updateArticles(+$route.params.id,data)
+  } else {
+    response = await store.updateArticles(+$route.params.id, data)
   }
-   
+
 
   FfMessage({
-    message:response,
-    type:"success", 
+    message: response,
+    type: "success",
   })
 
-  $router.push({path:"/"})
+  $router.push({ path: "/" })
 }
 type InsertFnType = (url: string, alt: string, href: string) => void
 editorConfig.MENU_CONF['uploadImage'] = {
@@ -185,4 +194,19 @@ editorConfig.MENU_CONF['uploadImage'] = {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content{
+  width: 80%;
+}
+.prop{
+  width: 50%;
+}
+@media screen and (max-width: 768px) {
+  .content{
+    width: 90%;
+  }
+  .prop {
+    width: 90%;
+  }
+}
+</style>
